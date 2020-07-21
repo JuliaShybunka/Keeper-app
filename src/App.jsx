@@ -12,11 +12,20 @@ function App() {
       return [item,...prevItem]
     })
   }
+
+  function handleDeleteNote(id){
+    setItems((prevItems)=>{
+      return prevItems.filter((item,index) => index !== id)
+    })
+
+    console.log(id)
+  }
+
   return (
     <div>
       <Header />
       <CreateArea addItem={addItem}/>
-      {items.map((item,index)=><Note title={item.title} content={item.content} key={index}/>)}
+      {items.map((item,index)=><Note deleteNote={handleDeleteNote} title={item.title} content={item.content} id={index} key={index}/>)}
       <Footer />
     </div>
   );

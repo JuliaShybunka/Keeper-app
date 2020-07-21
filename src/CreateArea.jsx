@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 
 function CreateArea(props) {
-  const [item, setItem] = useState("");
+  const [item, setItem] = useState({
+      title: "",
+      content: ""
+  });
   function handleChange(event) {
     const { name, value } = event.target;
     setItem((prevItem) => {
@@ -20,18 +23,24 @@ function CreateArea(props) {
           name="title"
           placeholder="Title"
           autoComplete="off"
+          value={item.title}
         />
         <textarea
           onChange={handleChange}
           name="content"
           placeholder="Take a note..."
           rows="3"
+          value={item.content}
         />
         <button
           onClick={(event) => {
-            props.addItem(item);
-            setItem("");
             event.preventDefault();
+            props.addItem(item);
+            setItem({
+                title: "",
+                content: ""
+            });
+           
           }}
         >
           Add
